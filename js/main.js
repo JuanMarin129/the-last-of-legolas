@@ -43,6 +43,18 @@ startBtnNode.addEventListener("click", () => {
     startGame();
 })
 
+window.addEventListener("keydown", (event) => {
+    if (event.code === "KeyD")
+        legolasObj.movimientoHorizontalDerecha();
+    if (event.code === "KeyA")
+        legolasObj.movimientoHorizontalIzquierda();
+    if (event.code === "KeyS")
+        legolasObj.movimientoVerticalAbajo();
+    if (event.code === "KeyW")
+        legolasObj.movimientoVerticalArriba();
+
+})
+
 
 
 

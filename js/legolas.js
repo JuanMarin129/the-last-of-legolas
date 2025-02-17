@@ -34,13 +34,23 @@ class Legolas {
 
     // Métodos de Legolas
 
-    movimientoHorizontal() {
+    movimientoHorizontalDerecha() {
         this.x += this.speed;
         this.node.style.left = `${this.x}px`;
     }
 
-    movimientoVertical() {
+    movimientoHorizontalIzquierda() {
+        this.x -= this.speed;
+        this.node.style.left = `${this.x}px`;
+    }
+
+    movimientoVerticalAbajo() {
         this.y += this.speed;
+        this.node.style.top = `${this.y}px`;
+    }
+
+    movimientoVerticalArriba() {
+        this.y -= this.speed;
         this.node.style.top = `${this.y}px`;
     }
 
