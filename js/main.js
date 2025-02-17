@@ -56,15 +56,26 @@ function startGame () {
 
 function gameLoop() {
     orkNormalArray.forEach((cadaOrk) => {
-        cadaOrk.movimientoAutomatico("horizontal");
+        cadaOrk.movimientoAutomatico();
     })
 }
 
 function enemigoSpawn() {
 
-    let orkNormalObj = new Enemigo();
+    let orkNormalDerechaObj = new Enemigo("derecha");
+    orkNormalArray.push(orkNormalDerechaObj);
 
-    orkNormalArray.push(orkNormalObj);
+    let orkNormalIzquierdaObj = new Enemigo("izquierda");
+    orkNormalArray.push(orkNormalIzquierdaObj);
+    
+    let orkNormalAbajoObj = new Enemigo("abajo");
+    orkNormalArray.push(orkNormalAbajoObj);
+    
+    let orkNormalArribaObj = new Enemigo("arriba");
+    orkNormalArray.push(orkNormalArribaObj);
+
+    console.log("Longitud array ", orkNormalArray.length);
+
 }
 
 
