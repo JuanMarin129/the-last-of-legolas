@@ -14,30 +14,28 @@ class Enemigo {
         // Configurar posición y dimensiones iniciales dependiendo de su posicionSpawn
 
         if(this.posicionSpawn === "derecha") {
-            this.x = Math.floor(Math.random() * 50) + 1050;
+            //this.x = Math.floor(Math.random() * 50) + 1050;
+            this.x = 1100;
             this.y = Math.floor(Math.random() * 600) + 90;
-            this.w = 90;
-            this.h = 90;
+            
         }
         else if(this.posicionSpawn === "izquierda") {
-            this.x = Math.floor(Math.random() * 50) - 150;
+            // this.x = Math.floor(Math.random() * 50) - 150;
+            this.x = -100;
             this.y = Math.floor(Math.random() * 600) + 90;
-            this.w = 90;
-            this.h = 90;
+
         }
         else if(this.posicionSpawn === "abajo") {
             this.x = Math.floor(Math.random() * 650) + 90;
-            this.y = 750;
-            this.w = 90;
-            this.h = 90;
+            this.y = 700;
         }
         else if(this.posicionSpawn === "arriba") {
             this.x = Math.floor(Math.random() * 650) + 90;
             this.y = -100;
-            this.w = 90;
-            this.h = 90;
         }
        
+        this.w = 90;
+        this.h = 90;
 
         // Lo añadimos al Game Box
         this.node.style.position = "absolute" // para ubicarlo dentro de la Game Box

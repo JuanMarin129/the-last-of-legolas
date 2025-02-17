@@ -23,6 +23,8 @@ let legolasObj = null;
 let orkNormalArray = [];
 let gameInvertalID = null;
 let enemigosSpawnID = null;
+//let anchoGameBox = gameBoxNode.style.width + 10;
+//let altoGameBox = gameBoxNode.style.height;
 
 
 // FUNCIONES DEL JUEGO
@@ -58,6 +60,9 @@ function gameLoop() {
     orkNormalArray.forEach((cadaOrk) => {
         cadaOrk.movimientoAutomatico();
     })
+
+    enemigoDespawn();
+    checkColisionLegolasOrkos();
 }
 
 function enemigoSpawn() {
@@ -67,16 +72,99 @@ function enemigoSpawn() {
 
     let orkNormalIzquierdaObj = new Enemigo("izquierda");
     orkNormalArray.push(orkNormalIzquierdaObj);
-    
+
     let orkNormalAbajoObj = new Enemigo("abajo");
     orkNormalArray.push(orkNormalAbajoObj);
-    
+   
     let orkNormalArribaObj = new Enemigo("arriba");
     orkNormalArray.push(orkNormalArribaObj);
 
     console.log("Longitud array ", orkNormalArray.length);
 
 }
+
+function enemigoDespawn() {
+    
+    orkNormalArray.forEach((cadaOrko, indice) => {
+        if(cadaOrko.posicionSpawn === "derecha" && cadaOrko.x < 0 - 90) {
+            cadaOrko.node.remove();
+
+            orkNormalArray.splice(indice, 1);
+        }
+
+        if(cadaOrko.posicionSpawn === "izquierda" && cadaOrko.x > 1000) {
+            cadaOrko.node.remove();
+
+            orkNormalArray.splice(indice, 1);
+        }
+        if(cadaOrko.posicionSpawn === "abajo" && cadaOrko.y < 0 - 90) {
+            cadaOrko.node.remove();
+
+            orkNormalArray.splice(indice, 1);
+        }
+
+        if(cadaOrko.posicionSpawn === "arriba" && cadaOrko.y > 700) {
+            cadaOrko.node.remove();
+
+            orkNormalArray.splice(indice, 1);
+        }
+
+
+    })
+    /*
+    if (orkNormalArray.length >0) {
+        console.log(orkNormalArray[0].y)
+        if((orkNormalArray[0].posicionSpawn === "arriba") && (orkNormalArray[0].y > 700)) {
+            orkNormalArray[0].node.remove();
+
+            orkNormalArray.shift();
+
+            console.log("ORKO ABAJO BORRADO!!!");
+        }
+        else if((orkNormalArray[0].posicionSpawn === "izquierda") && (orkNormalArray[0].x > 1000 + orkNormalArray[0].w)) {
+            orkNormalArray[0].node.remove();
+
+            orkNormalArray.shift();
+
+            console.log("ORKO IZQUIERDO BORRADO!!!");
+        }
+        else if((orkNormalArray[0].posicionSpawn === "derecha") && (orkNormalArray[0].x < 0 - orkNormalArray[0].w)) {
+            orkNormalArray[0].node.remove();
+
+            orkNormalArray.shift();
+
+            console.log("ORKO DERECHO BORRADO!!!");
+        }
+        else if((orkNormalArray[0].posicionSpawn === "abajo") && (orkNormalArray[0].y < 0 - orkNormalArray[0].w)) {
+            orkNormalArray[0].node.remove();
+
+            orkNormalArray.shift();
+
+            console.log("ORKO ARRIBA BORRADO!!!");
+        }
+
+        
+       
+    }*/
+        
+}
+
+function checkColisionLegolasOrkos() {
+    orkNormalArray.forEach((cadaOrko) => { 
+    if (
+        cadaOrko.x < legolasObj.x + legolasObj.w &&
+        cadaOrko.x + cadaOrko.w > legolasObj.x &&
+        cadaOrko.y < legolasObj.y + legolasObj.h &&
+        cadaOrko.y + cadaOrko.h > legolasObj.y
+      ) {
+        // Collision detected!
+        console.log("COLISION!!!");
+      }
+
+    })
+}
+
+
 
 
 
