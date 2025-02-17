@@ -41,7 +41,7 @@ body {
     height: 700px;
 
     position: relative; /* Para posicionar los elementos de forma absoluta dentro del game-box */
-    overflow: hidden; /* para ocultar los elementos de fuera del game-box. Dejarlo en comentarios mientras se hacen pruebas.*/
+    /*overflow: hidden; /* para ocultar los elementos de fuera del game-box. Dejarlo en comentarios mientras se hacen pruebas.*/
     user-select: none; /* Para impedir que los elementos del game-box sean resaltados */
  
 }

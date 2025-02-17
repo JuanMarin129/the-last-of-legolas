@@ -14,6 +14,10 @@ const restartBtnNode = document.querySelector("#restart-button");
 
 const gameBoxNode = document.querySelector("#game-box");
 
+// TIEMPO TRANSCURRIDO
+const tiempoTranscurridoContenedor = document.querySelector("#tiempo-transcurrido")
+
+
 
 // VARIABLES GLOBALES
 
@@ -23,6 +27,9 @@ let legolasObj = null;
 let orkNormalArray = [];
 let gameInvertalID = null;
 let enemigosSpawnID = null;
+let timerID = null;
+let cronometro = 0;
+
 //let anchoGameBox = gameBoxNode.style.width + 10;
 //let altoGameBox = gameBoxNode.style.height;
 
@@ -53,8 +60,46 @@ function startGame () {
         enemigoSpawn();
 
     }, 2000) // 2 segundos
+
+    startCronometro();
 }
 
+function restartGame () {
+     // Borramos los nodos hijos de Game Box para "limpiar" la pantalla
+        /* legolasObj.node.remove();
+        orkNormalArray.forEach((cadaOrko) => {
+            cadaOrko.node.remove();
+        })*/
+
+        gameBoxNode.innerHTML = null;
+    
+        // Reiniciamos las variables a su modo inicio
+        gameOverScreenNode.style.display = "none";
+        legolasObj = null;
+        orkNormalArray = [];
+        gameInvertalID = null;
+        enemigosSpawnID = null;
+        timerID = null;
+        cronometro = 0;
+}
+
+function startCronometro() {
+    // Tiempo transcurrido
+    timerID = setInterval( () => {
+        cronometro += 1;
+       //console.log("Estamos dentro de TimerID", cronometro);
+
+        // Mostramos el cronometro en minutos y segundos
+        let minutos = Math.floor(cronometro / 60)
+        .toString()
+        .padStart(2, "0");
+        let segundos = (cronometro % 60).toString().padStart(2, "0");
+        tiempoTranscurridoContenedor.innerText = `Tiempo Transcurrido: ${minutos}:${segundos}`;
+
+        //console.log(`Minutos y segundos ${minutos}:${segundos}`);
+
+    },1000) // 1 segundo
+}
 
 function gameLoop() {
     orkNormalArray.forEach((cadaOrk) => {
@@ -159,9 +204,25 @@ function checkColisionLegolasOrkos() {
       ) {
         // Collision detected!
         console.log("COLISION!!!");
+        gameOver();
+
       }
 
     })
+}
+
+function gameOver() {
+    // Detenemos TODOS los intervalos
+    clearInterval(gameIntervalID);
+    clearInterval(enemigosSpawnID);
+    clearInterval(timerID);
+    cronometro = 0;
+
+    // Ocultar la pantalla de juego
+    gameScreenNode.style.display = "none";
+
+    // Mostrar la pantalla final
+    gameOverScreenNode.style.display = "flex";
 }
 
 
@@ -173,6 +234,16 @@ function checkColisionLegolasOrkos() {
 startBtnNode.addEventListener("click", () => {
     startGame();
 })
+
+restartBtnNode.addEventListener("click", () => {
+    // Reiniciamos las variables y "limpiamos" nodos de Game-Box
+    restartGame();
+    
+    // Lanzamos el juego
+    startGame();
+})
+
+
 
 
 // Movimiento Legolas
