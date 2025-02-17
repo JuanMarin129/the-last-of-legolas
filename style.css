@@ -1,0 +1,53 @@
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    scroll-padding-top: 0rem;
+}
+*, 
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin: 0;
+    background-color: #f1d996;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+}
+
+#start-button {
+    background-color: yellowgreen;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+#game-screen {
+    display: none;
+}
+
+#game-box {
+    background-color: #16a74b;
+    width: 1000px;
+    height: 700px;
+
+    position: relative; /* Para posicionar los elementos de forma absoluta dentro del game-box
+    /*-overflow: hidden /* para ocultar los elementos de fuera del game-box. Dejarlo en comentarios mientras se hacen pruebas.*/
+    user-select: none; /* Para impedir que los elementos del game-box sean resaltados */
+ 
+}
+
+#game-box * {
+    pointer-events: none; /* Evita que el jugador arrastre sin querer los elemengos del game-box*/
+}
+
+

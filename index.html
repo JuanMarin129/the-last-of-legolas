@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>The Last of Legolas</title>
+</head>
+<body>
+    
+<!-- PANTALLA DE INICIO -->
+ <div id="start-screen" class="container">   
+    <h1>Last of Legolas</h1>
+    <button id="start-button">Empezar Partida</button>
+ </div>
+    
+
+<!-- PANTALLA DE JUEGO -->
+
+ <div id="game-screen" class="container">
+    <!-- Los distintos elementos como vida, tiempo y demás deberían de ir aquí, dentro del game-screen pero fuera del game-box-->
+     <div id="game-box">
+        <!-- La pantalla de juego donde iniciará nuestro juego, moveremos a nuestro jugador y aparecerán los enemigos-->
+     </div>
+ </div>
+
+
+<!-- PANTALLA FINAL -->
+ <div id="game-over-screen" class="container">
+    <h1>GAME OVER</h1>
+    <!-- La pantalla final donde se mostrará el tiempo conseguido-->
+     <button id="restart-button">Empezar Nueva Partida</button>
+ </div>
+
+
+ <script src="js/main.js"></script>  
+ <script src="js/legolas.js"></script>  
+ <script src="js/enemigos.js"></script>  
+  
+</body>
+</html>
