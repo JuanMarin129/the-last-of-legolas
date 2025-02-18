@@ -50,4 +50,12 @@ body {
     pointer-events: none; /* Evita que el jugador arrastre sin querer los elemengos del game-box*/
 }
 
+#tiempo-transcurrido {
+    font-family: "Caesar Dressing", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+}
+
 

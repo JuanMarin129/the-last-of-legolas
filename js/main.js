@@ -66,7 +66,7 @@ function startGame () {
 
 function restartGame () {
      // Borramos los nodos hijos de Game Box para "limpiar" la pantalla
-        /* legolasObj.node.remove();
+        /*legolasObj.node.remove();
         orkNormalArray.forEach((cadaOrko) => {
             cadaOrko.node.remove();
         })*/
