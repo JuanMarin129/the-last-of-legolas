@@ -15,7 +15,10 @@ const restartBtnNode = document.querySelector("#restart-button");
 const gameBoxNode = document.querySelector("#game-box");
 
 // TIEMPO TRANSCURRIDO
-const tiempoTranscurridoContenedor = document.querySelector("#tiempo-transcurrido")
+const tiempoTranscurridoContenedor = document.querySelector("#tiempo-transcurrido");
+
+// MEJOR PUNTUACIÓN
+const mejorPuntuacionNode = document.querySelector("#mejor-puntuacion");
 
 
 
@@ -29,6 +32,7 @@ let gameInvertalID = null;
 let enemigosSpawnID = null;
 let timerID = null;
 let cronometro = 0;
+let mejorPuntuacion = 0;
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
 //let altoGameBox = gameBoxNode.style.height;
@@ -59,7 +63,7 @@ function startGame () {
         //Enemigo Spawnea
         enemigoSpawn();
 
-    }, 2000) // 2 segundos
+    }, 5000) // 2 segundos
 
     startCronometro();
 }
@@ -85,7 +89,7 @@ function restartGame () {
 function startCronometro() {
     // Tiempo transcurrido
     timerID = setInterval( () => {
-        cronometro += 1;
+        cronometro += 5;
        //console.log("Estamos dentro de TimerID", cronometro);
 
         // Mostramos el cronometro en minutos y segundos
@@ -215,7 +219,50 @@ function gameOver() {
     clearInterval(gameIntervalID);
     clearInterval(enemigosSpawnID);
     clearInterval(timerID);
-    cronometro = 0;
+
+    let mejorCrono = "";
+    
+    // Guardamos la puntuación si ha superado la anterior marca
+    if((localStorage.getItem(mejorPuntuacion) < cronometro)) {
+        
+        //console.log("Esto es Local Storage ANTES del setItem", localStorage.getItem(mejorPuntuacion));
+
+        localStorage.setItem(mejorPuntuacion, cronometro);
+        mejorCrono = localStorage.getItem(mejorPuntuacion);
+
+        //console.log("Esto es cronometro " + cronometro);
+
+        
+
+        // Añadimos el nuevo marcador al HTML
+        minutos = Math.floor(localStorage.getItem(mejorPuntuacion) / 60)
+        .toString()
+        .padStart(2, "0");
+        segundos = (localStorage.getItem(mejorPuntuacion) % 60).toString().padStart(2, "0");
+        mejorPuntuacionNode.innerText = `¡Felicidades! Has mejorado tu mejor tiempo. Ahora es: ${minutos}:${segundos}`;
+    }
+    else {
+        let minutosActuales = Math.floor(cronometro / 60)
+        .toString()
+        .padStart(2, "0");
+        let segundosActuales = (cronometro % 60).toString().padStart(2, "0");
+
+        let minutosMejores = Math.floor(localStorage.getItem(mejorPuntuacion) / 60)
+        .toString()
+        .padStart(2, "0");
+        let segundosMejores = (localStorage.getItem(mejorPuntuacion) % 60).toString().padStart(2, "0");
+        mejorPuntuacionNode.innerText = `No has podido mejorar tu marca... ¡Sigue intentándolo! 
+        La marca que has conseguido ahora es: ${minutosActuales}:${segundosActuales}
+        La mejor marca que has conseguido es: ${minutosMejores}:${segundosMejores}`;
+
+    }
+
+    
+
+
+
+
+    
 
     // Ocultar la pantalla de juego
     gameScreenNode.style.display = "none";
