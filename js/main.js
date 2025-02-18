@@ -70,7 +70,6 @@ function restartGame () {
         orkNormalArray.forEach((cadaOrko) => {
             cadaOrko.node.remove();
         })*/
-
         gameBoxNode.innerHTML = null;
     
         // Reiniciamos las variables a su modo inicio
@@ -197,10 +196,10 @@ function enemigoDespawn() {
 function checkColisionLegolasOrkos() {
     orkNormalArray.forEach((cadaOrko) => { 
     if (
-        cadaOrko.x < legolasObj.x + legolasObj.w &&
-        cadaOrko.x + cadaOrko.w > legolasObj.x &&
-        cadaOrko.y < legolasObj.y + legolasObj.h &&
-        cadaOrko.y + cadaOrko.h > legolasObj.y
+        (cadaOrko.x + 10 < legolasObj.x + legolasObj.w)  &&
+        (cadaOrko.x + cadaOrko.w > 10 + legolasObj.x) &&
+        (cadaOrko.y +10 < legolasObj.y + legolasObj.h) &&
+        (cadaOrko.y + cadaOrko.h > 10 + legolasObj.y)
       ) {
         // Collision detected!
         console.log("COLISION!!!");
