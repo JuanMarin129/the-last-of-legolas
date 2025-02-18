@@ -63,7 +63,7 @@ function startGame () {
         //Enemigo Spawnea
         enemigoSpawn();
 
-    }, 5000) // 2 segundos
+    }, 2000) // 2 segundos
 
     startCronometro();
 }
@@ -89,15 +89,20 @@ function restartGame () {
 function startCronometro() {
     // Tiempo transcurrido
     timerID = setInterval( () => {
-        cronometro += 5;
+        cronometro += 1;
        //console.log("Estamos dentro de TimerID", cronometro);
 
         // Mostramos el cronometro en minutos y segundos
+        let actualTiempo = formatoMinutosSegundos(cronometro);
+        tiempoTranscurridoContenedor.innerText = `Tiempo Transcurrido: ${actualTiempo[0]}:${actualTiempo[1]}`;
+
+        /*
         let minutos = Math.floor(cronometro / 60)
         .toString()
         .padStart(2, "0");
         let segundos = (cronometro % 60).toString().padStart(2, "0");
         tiempoTranscurridoContenedor.innerText = `Tiempo Transcurrido: ${minutos}:${segundos}`;
+        */
 
         //console.log(`Minutos y segundos ${minutos}:${segundos}`);
 
@@ -220,7 +225,21 @@ function gameOver() {
     clearInterval(enemigosSpawnID);
     clearInterval(timerID);
 
-    let mejorCrono = "";
+    // Comprobamos si hemos mejorado nuestra mejor puntuacion y actualizamos
+    actualizarPuntuacion();
+
+    // Ocultar la pantalla de juego
+    gameScreenNode.style.display = "none";
+
+    // Mostrar la pantalla final
+    gameOverScreenNode.style.display = "flex";
+}
+
+
+function actualizarPuntuacion() {
+
+    let cronoActual;
+    let mejorCrono;
     
     // Guardamos la puntuación si ha superado la anterior marca
     if((localStorage.getItem(mejorPuntuacion) < cronometro)) {
@@ -228,20 +247,25 @@ function gameOver() {
         //console.log("Esto es Local Storage ANTES del setItem", localStorage.getItem(mejorPuntuacion));
 
         localStorage.setItem(mejorPuntuacion, cronometro);
-        mejorCrono = localStorage.getItem(mejorPuntuacion);
+        //mejorCrono = localStorage.getItem(mejorPuntuacion);
 
         //console.log("Esto es cronometro " + cronometro);
 
         
 
         // Añadimos el nuevo marcador al HTML
-        minutos = Math.floor(localStorage.getItem(mejorPuntuacion) / 60)
-        .toString()
-        .padStart(2, "0");
-        segundos = (localStorage.getItem(mejorPuntuacion) % 60).toString().padStart(2, "0");
-        mejorPuntuacionNode.innerText = `¡Felicidades! Has mejorado tu mejor tiempo. Ahora es: ${minutos}:${segundos}`;
+
+        mejorCrono = formatoMinutosSegundos(localStorage.getItem(mejorPuntuacion))
+        mejorPuntuacionNode.innerText = `¡Felicidades! Has mejorado tu mejor tiempo. Ahora es: ${mejorCrono[0]}:${mejorCrono[1]}`;
     }
     else {
+
+        // Mostramos el tiempo actual y el mejor tiempo conseguido hasta ahora
+
+        cronoActual = formatoMinutosSegundos(cronometro);
+        mejorCrono = formatoMinutosSegundos(localStorage.getItem(mejorPuntuacion));
+
+        /*
         let minutosActuales = Math.floor(cronometro / 60)
         .toString()
         .padStart(2, "0");
@@ -251,26 +275,28 @@ function gameOver() {
         .toString()
         .padStart(2, "0");
         let segundosMejores = (localStorage.getItem(mejorPuntuacion) % 60).toString().padStart(2, "0");
+
+        */
+
+
+        // Lo añadimos al HTML
         mejorPuntuacionNode.innerText = `No has podido mejorar tu marca... ¡Sigue intentándolo! 
-        La marca que has conseguido ahora es: ${minutosActuales}:${segundosActuales}
-        La mejor marca que has conseguido es: ${minutosMejores}:${segundosMejores}`;
+        La marca que has conseguido ahora es: ${cronoActual[0]}:${cronoActual[1]}
+        La mejor marca que has conseguido es: ${mejorCrono[0]}:${mejorCrono[1]}`;
 
     }
-
-    
-
-
-
-
-    
-
-    // Ocultar la pantalla de juego
-    gameScreenNode.style.display = "none";
-
-    // Mostrar la pantalla final
-    gameOverScreenNode.style.display = "flex";
 }
 
+
+function formatoMinutosSegundos(tiempo) {
+    let tiempoArray = [];
+
+    tiempoArray.push(Math.floor(tiempo / 60).toString().padStart(2, "0")); 
+    tiempoArray.push((tiempo % 60).toString().padStart(2, "0"));
+
+    return tiempoArray;
+
+}
 
 
 
