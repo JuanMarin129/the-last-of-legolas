@@ -35,26 +35,38 @@ class Legolas {
     // Métodos de Legolas
 
     movimientoHorizontalDerecha() {
+        // Con el if, impedimos que Legolas se salga del Game Box por la derecha
+        if((this.x + this.w +5) <= gameBoxNode.offsetWidth) {
         this.x += this.speed;
         this.node.style.left = `${this.x}px`;
+        }
     }
 
     movimientoHorizontalIzquierda() {
-        this.x -= this.speed;
-        this.node.style.left = `${this.x}px`;
+        // Con el if, impedimos que Legolas se salga del Game Box por la izquierda
+        if(this.x -5 >= 0) {
+            this.x -= this.speed;
+            this.node.style.left = `${this.x}px`;
+        }
     }
 
     movimientoVerticalAbajo() {
-        this.y += this.speed;
-        this.node.style.top = `${this.y}px`;
+        // Con el if, impedimos que Legolas se salga del Game Box por abajo
+        if((this.y + this.h + 5) <= gameBoxNode.offsetHeight) {
+            this.y += this.speed;
+            this.node.style.top = `${this.y}px`;
+        }
     }
 
     movimientoVerticalArriba() {
-        this.y -= this.speed;
-        this.node.style.top = `${this.y}px`;
+        // Con el if, impedimos que Legolas se salga del Game Box por arriba
+        if(this.y - 5 >= 0) {
+            this.y -= this.speed;
+            this.node.style.top = `${this.y}px`;
+        }
     }
 
-
+    // Los condicionales se usan para delimitar el movimiento de Legolas en el Game Box. Los offset son los valores finales de la Game Box, mientras que el inicial es 0.
 
 
 
