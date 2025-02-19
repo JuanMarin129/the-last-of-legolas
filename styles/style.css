@@ -14,7 +14,7 @@ body {
     line-height: 1.5;
     margin: 0;
     /*background-color: #f1d996;*/
-    background-image: url(./images/bg_01.jpg);
+    background-image: url(../images/bg_01.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -39,8 +39,8 @@ body {
 }
 
 #game-box {
-    /*background-color: #16a74b;*/
-    background-image: url(./images/suelo_hierba_01.jpg);
+    background-color: #16a74b;
+    /*background-image: url(../images/suelo_hierba_01.jpg);*/
     width: 1000px;
     height: 700px;
 

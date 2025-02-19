@@ -29,11 +29,18 @@ gameOverScreenNode.style.display = "none";
 let legolasObj = null;
 let orkNormalArray = [];
 let gameInvertalID = null;
-let enemigosSpawnID = [];
+let enemigosSpawnArribaID = null;
+let enemigosSpawnAbajoID = null;
+let enemigosSpawnDerechaID = null;
+let enemigosSpawnIzquierdaID = null;
+let timeOutOleada2 = null;
+let timeOutOleada3 = null;
+let timeOutOleada4 = null;
+let timeOutOleada5 = null;
 let timerID = null;
 let cronometro = 0;
 let mejorPuntuacion = 0;
-let puntoDeSpawn = ["derecha", "izquierda", "arriba", "abajo"];
+//let puntoDeSpawn = ["derecha", "izquierda", "arriba", "abajo"];
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
 //let altoGameBox = gameBoxNode.style.height;
@@ -60,57 +67,60 @@ function startGame () {
     }, Math.round(1000/60)) // 60fps
 
     // Iniciamos el spawn de enemigos
-    enemigosSpawnID[0] = setInterval( () => {
+
+
+    // Oleada 1
+    enemigosSpawnDerechaID = setInterval( () => {
         //Enemigo Spawnea
-        enemigoSpawn(puntoDeSpawn[0]);
+        enemigoSpawn("derecha");
 
     }, 4000) // 4 segundos
 
     // Oleada 2
-    setTimeout (() => {
-        enemigosSpawnID[1] = setInterval( () => {
+    timeOutOleada2 = setTimeout (() => {
+        enemigosSpawnIzquierdaID = setInterval( () => {
             //Enemigo Spawnea
-            enemigoSpawn(puntoDeSpawn[1]);
+            enemigoSpawn("izquierda");
     
         }, 4000) // 4 segundos
 
     },30000) // 30 segundos
 
     // Oleada 3
-    setTimeout (() => {
-        enemigosSpawnID[2] = setInterval( () => {
+    timeOutOleada3 = setTimeout (() => {
+        enemigosSpawnAbajoID = setInterval( () => {
             //Enemigo Spawnea
-            enemigoSpawn(puntoDeSpawn[2]);
+            enemigoSpawn("abajo");
     
         }, 2000) // 2 segundos
 
     },60000) // 60 segundos
 
     // Oleada 4
-    setTimeout (() => {
-        enemigosSpawnID[3] = setInterval( () => {
+    timeOutOleada4 = setTimeout (() => {
+        enemigosSpawnArribaID = setInterval( () => {
             //Enemigo Spawnea
-            enemigoSpawn(puntoDeSpawn[3]);
+            enemigoSpawn("arriba");
     
         }, 2000) // 2 segundos
 
     },90000) // 90 segundos
 
     // Oleada 5
-    setTimeout (() => {
+    timeOutOleada5 = setTimeout (() => {
         // Detenemos el primer intervalo para reiniciar oleada con spawn de menor tiempo
-        clearInterval(enemigosSpawnID[0]);
-        clearInterval(enemigosSpawnID[1]);
+        clearInterval(enemigosSpawnDerechaID);
+        clearInterval(enemigosSpawnIzquierdaID);
 
-        enemigosSpawnID[0] = setInterval( () => {
+        enemigosSpawnDerechaID = setInterval( () => {
             //Enemigo Spawnea
-            enemigoSpawn(puntoDeSpawn[0]);
+            enemigoSpawn("derecha");
     
         }, 2000) // 2 segundos
 
-        enemigosSpawnID[1] = setInterval( () => {
+        enemigosSpawnIzquierdaID = setInterval( () => {
             //Enemigo Spawnea
-            enemigoSpawn(puntoDeSpawn[1]);
+            enemigoSpawn("izquierda");
     
         }, 2000) // 2 segundos
 
@@ -276,8 +286,14 @@ function gameOver() {
     clearTimeout();
     clearInterval(gameIntervalID);
     clearInterval(timerID);
-    for (let i=0; i<enemigosSpawnID.length;i++)
-        clearInterval(enemigosSpawnID[i]);
+    clearInterval(enemigosSpawnDerechaID);
+    clearInterval(enemigosSpawnIzquierdaID);
+    clearInterval(enemigosSpawnArribaID);
+    clearInterval(enemigosSpawnAbajoID);
+    clearTimeout(timeOutOleada2);
+    clearTimeout(timeOutOleada3);
+    clearTimeout(timeOutOleada4);
+    clearTimeout(timeOutOleada5);
     
 
     // Comprobamos si hemos mejorado nuestra mejor puntuacion y actualizamos
