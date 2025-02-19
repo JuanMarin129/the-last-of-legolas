@@ -28,6 +28,7 @@ gameOverScreenNode.style.display = "none";
 //gameScreenNode.style.display = "none";
 let legolasObj = null;
 let orkNormalArray = [];
+let flechaArray = [];
 let gameInvertalID = null;
 let enemigosSpawnArribaID = null;
 let enemigosSpawnAbajoID = null;
@@ -175,9 +176,14 @@ function gameLoop() {
         cadaOrk.movimientoAutomatico();
     })
 
+    flechaArray.forEach((cadaFlecha) => {
+        cadaFlecha.movimientoFlecha();
+    })
+
     legolasObj.movimientoLegolas();
     enemigoDespawn();
     checkColisionLegolasOrkos();
+    checkColisionFlechasOrkos();
 }
 
 function enemigoSpawn(spawn) {
@@ -264,6 +270,9 @@ function enemigoDespawn() {
         
 }
 
+
+// COLISIONES 
+
 function checkColisionLegolasOrkos() {
     orkNormalArray.forEach((cadaOrko) => { 
     if (
@@ -273,12 +282,34 @@ function checkColisionLegolasOrkos() {
         (cadaOrko.y + cadaOrko.h > 10 + legolasObj.y)
       ) {
         // Collision detected!
-        console.log("COLISION!!!");
+        //console.log("COLISION!!!");
         gameOver();
 
       }
 
     })
+}
+
+function checkColisionFlechasOrkos() {
+    orkNormalArray.forEach((cadaOrko) => { 
+        flechaArray.forEach((cadaFlecha) => {
+
+        
+        if (
+            (cadaOrko.x + 10 < cadaFlecha.x + cadaFlecha.w)  &&
+            (cadaOrko.x + cadaOrko.w > 10 + cadaFlecha.x) &&
+            (cadaOrko.y + 10 < cadaFlecha.y + cadaFlecha.h) &&
+            (cadaOrko.y + cadaOrko.h > 10 + cadaFlecha.y)
+          ) {
+            // Collision detected!
+            console.log("COLISION FLECHA CON ORKO!!");
+
+    
+          }
+
+        })
+    
+        })
 }
 
 function gameOver() {
@@ -445,6 +476,19 @@ window.addEventListener("keyup", (event) => {
         legolasObj.isMovingDown = false
     if (event.code === "KeyW")
         legolasObj.isMovingUp = false;
+})
+
+window.addEventListener("keydown", (event) => {
+    if (event.code === "Space" && legolasObj.canShoot) {
+        let flechaObj = new Flecha(legolasObj.x, legolasObj.y);
+        flechaArray.push(flechaObj);
+        legolasObj.canShoot = false;
+        setTimeout(() => {
+            legolasObj.canShoot = true;
+        },2000) // 2 segundos de delay entre cada disparo
+    }
+
+    
 })
 
 

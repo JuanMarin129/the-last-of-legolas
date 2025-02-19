@@ -32,6 +32,7 @@ class Legolas {
         this.isMovingLeft = false;
         this.isMovingUp = false;
         this.isMovingDown = false;
+        this.canShoot = true;
 
     }
 
