@@ -165,6 +165,7 @@ function gameLoop() {
         cadaOrk.movimientoAutomatico();
     })
 
+    legolasObj.movimientoLegolas();
     enemigoDespawn();
     checkColisionLegolasOrkos();
 }
@@ -258,7 +259,7 @@ function checkColisionLegolasOrkos() {
     if (
         (cadaOrko.x + 10 < legolasObj.x + legolasObj.w)  &&
         (cadaOrko.x + cadaOrko.w > 10 + legolasObj.x) &&
-        (cadaOrko.y +10 < legolasObj.y + legolasObj.h) &&
+        (cadaOrko.y + 10 < legolasObj.y + legolasObj.h) &&
         (cadaOrko.y + cadaOrko.h > 10 + legolasObj.y)
       ) {
         // Collision detected!
@@ -272,6 +273,7 @@ function checkColisionLegolasOrkos() {
 
 function gameOver() {
     // Detenemos TODOS los intervalos
+    clearTimeout();
     clearInterval(gameIntervalID);
     clearInterval(timerID);
     for (let i=0; i<enemigosSpawnID.length;i++)
@@ -372,16 +374,61 @@ restartBtnNode.addEventListener("click", () => {
 
 
 // Movimiento Legolas
+
+
+/*
+function movimientoLegolas () {
+    if(legolasObj.isMovingRight) {
+        console.log("Entramos en MovingRigth")
+        if((this.x + this.w +5) <= gameBoxNode.offsetWidth) {
+            this.x += this.speed;
+            this.node.style.left = `${this.x}px`;
+            }
+    }
+
+    if(legolasObj.isMovingLeft) {
+        if(this.x -5 >= 0) {
+            this.x -= this.speed;
+            this.node.style.left = `${this.x}px`;
+        }
+    }
+
+    if(legolasObj.isMovingUp) {
+        if(this.y - 5 >= 0) {
+            this.y -= this.speed;
+            this.node.style.top = `${this.y}px`;
+        }
+    }
+
+    if(legolasObj.isMovingDown) {
+        if((this.y + this.h + 5) <= gameBoxNode.offsetHeight) {
+            this.y += this.speed;
+            this.node.style.top = `${this.y}px`;
+        }
+    }
+
+}*/
+
 window.addEventListener("keydown", (event) => {
     if (event.code === "KeyD")
-        legolasObj.movimientoHorizontalDerecha();
+        legolasObj.isMovingRight = true;
     if (event.code === "KeyA")
-        legolasObj.movimientoHorizontalIzquierda();
+        legolasObj.isMovingLeft = true;
     if (event.code === "KeyS")
-        legolasObj.movimientoVerticalAbajo();
+        legolasObj.isMovingDown = true
     if (event.code === "KeyW")
-        legolasObj.movimientoVerticalArriba();
+        legolasObj.isMovingUp = true;
+})
 
+window.addEventListener("keyup", (event) => {
+    if (event.code === "KeyD")
+        legolasObj.isMovingRight = false;
+    if (event.code === "KeyA")
+        legolasObj.isMovingLeft = false;
+    if (event.code === "KeyS")
+        legolasObj.isMovingDown = false
+    if (event.code === "KeyW")
+        legolasObj.isMovingUp = false;
 })
 
 

@@ -13,7 +13,10 @@ body {
     font-size: 1.6rem;
     line-height: 1.5;
     margin: 0;
-    background-color: #f1d996;
+    /*background-color: #f1d996;*/
+    background-image: url(./images/bg_01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
@@ -36,12 +39,13 @@ body {
 }
 
 #game-box {
-    background-color: #16a74b;
+    /*background-color: #16a74b;*/
+    background-image: url(./images/suelo_hierba_01.jpg);
     width: 1000px;
     height: 700px;
 
     position: relative; /* Para posicionar los elementos de forma absoluta dentro del game-box */
-    /*overflow: hidden; /* para ocultar los elementos de fuera del game-box. Dejarlo en comentarios mientras se hacen pruebas.*/
+    overflow: hidden; /* para ocultar los elementos de fuera del game-box. Dejarlo en comentarios mientras se hacen pruebas.*/
     user-select: none; /* Para impedir que los elementos del game-box sean resaltados */
  
 }

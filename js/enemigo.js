@@ -34,8 +34,8 @@ class Enemigo {
             this.y = -100;
         }
        
-        this.w = 90;
-        this.h = 90;
+        this.w = 105;
+        this.h = 105;
 
         // Lo añadimos al Game Box
         this.node.style.position = "absolute" // para ubicarlo dentro de la Game Box
@@ -45,7 +45,7 @@ class Enemigo {
         this.node.style.height = `${this.h}px`;
 
         // Propiedades adicionales
-        this.speed = 2;
+        this.speed = 2.5;
 
     }
 

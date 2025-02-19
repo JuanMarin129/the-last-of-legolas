@@ -4,7 +4,7 @@ class Legolas {
 
         // Creamos nodo y lo añadimos a la Game Box
         this.node = document.createElement("img");
-        this.node.src = "./images/Legolas_01.png";
+        this.node.src = "./images/Legolas_02.png";
 
         // Añadimos el nodo
         gameBoxNode.append(this.node);
@@ -14,8 +14,8 @@ class Legolas {
         // Atributos de Legolas
         this.x = 60     // Eje X
         this.y = 50     // Eje Y
-        this.w = 50;    // Ancho Legolas
-        this.h = 60;    // Alto Legolas
+        this.w = 80;    // Ancho Legolas
+        this.h = 90;    // Alto Legolas
 
         this.node.style.position = "absolute" // Para ubicarlo dentro de la caja del juego
 
@@ -27,13 +27,51 @@ class Legolas {
 
 
         // Propiedades adicionales
-        this.speed = 10;
+        this.speed = 3;
+        this.isMovingRight = false;
+        this.isMovingLeft = false;
+        this.isMovingUp = false;
+        this.isMovingDown = false;
+
     }
 
 
 
     // Métodos de Legolas
 
+
+    movimientoLegolas () {
+        if(this.isMovingRight) {
+            if((this.x + this.w +5) <= gameBoxNode.offsetWidth) {
+                this.x += this.speed;
+                this.node.style.left = `${this.x}px`;
+                }
+        }
+
+        if(this.isMovingLeft) {
+            if(this.x -5 >= 0) {
+                this.x -= this.speed;
+                this.node.style.left = `${this.x}px`;
+            }
+        }
+
+        if(this.isMovingUp) {
+            if(this.y - 5 >= 0) {
+                this.y -= this.speed;
+                this.node.style.top = `${this.y}px`;
+            }
+        }
+
+        if(this.isMovingDown) {
+            if((this.y + this.h + 5) <= gameBoxNode.offsetHeight) {
+                this.y += this.speed;
+                this.node.style.top = `${this.y}px`;
+            }
+        }
+
+    }
+
+/*
     movimientoHorizontalDerecha() {
         // Con el if, impedimos que Legolas se salga del Game Box por la derecha
         if((this.x + this.w +5) <= gameBoxNode.offsetWidth) {
@@ -67,7 +105,7 @@ class Legolas {
     }
 
     // Los condicionales se usan para delimitar el movimiento de Legolas en el Game Box. Los offset son los valores finales de la Game Box, mientras que el inicial es 0.
-
+*/
 
 
 
