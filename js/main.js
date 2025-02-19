@@ -506,20 +506,26 @@ window.addEventListener("keyup", (event) => {
 gameBoxNode.addEventListener("click", (event) => {
     // Creamos la flecha y la ponemos en el Array
     //console.log(event)
-    let posicionFlechaX = event.offsetX
-    let posicionFlechaY = event.offsetY
     
-    let anguloDisparo = Math.atan2(posicionFlechaY - legolasObj.y, posicionFlechaX - legolasObj.x);
+    
+    if(legolasObj.canShoot) {
+        let posicionFlechaX = event.offsetX
+        let posicionFlechaY = event.offsetY
+        
+        let anguloDisparo = Math.atan2(posicionFlechaY - legolasObj.y, posicionFlechaX - legolasObj.x);
 
-    let flechaObj = new Flecha(legolasObj.x, legolasObj.y, anguloDisparo);
-    //let flechaObj = new Flecha(event.clientX, event.clientY,anguloDisparo);
-    flechaArray.push(flechaObj);
+        let flechaObj = new Flecha(legolasObj.x, legolasObj.y, anguloDisparo);
+        //let flechaObj = new Flecha(event.clientX, event.clientY,anguloDisparo);
+        flechaArray.push(flechaObj);
 
-    legolasObj.canShoot = false;
-    setTimeout(() => {
-        legolasObj.canShoot = true;
-    },2000) // 2 segundos de delay entre cada disparo
+        legolasObj.canShoot = false;
+        setTimeout(() => {
+            legolasObj.canShoot = true;
+        },2000) // 2 segundos de delay entre cada disparo
+    }
 })
+
+    
 
 /*
 window.addEventListener("keydown", (event) => {
