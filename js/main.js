@@ -291,24 +291,28 @@ function checkColisionLegolasOrkos() {
 }
 
 function checkColisionFlechasOrkos() {
-    orkNormalArray.forEach((cadaOrko) => { 
-        flechaArray.forEach((cadaFlecha) => {
+    orkNormalArray.forEach((cadaOrko, indiceOrko) => { 
+        flechaArray.forEach((cadaFlecha, indiceFlecha) => {
 
         
-        if (
-            (cadaOrko.x + 10 < cadaFlecha.x + cadaFlecha.w)  &&
-            (cadaOrko.x + cadaOrko.w > 10 + cadaFlecha.x) &&
-            (cadaOrko.y + 10 < cadaFlecha.y + cadaFlecha.h) &&
-            (cadaOrko.y + cadaOrko.h > 10 + cadaFlecha.y)
-          ) {
-            // Collision detected!
-            console.log("COLISION FLECHA CON ORKO!!");
+            if (
+                (cadaOrko.x + 10 < cadaFlecha.x + cadaFlecha.w)  &&
+                (cadaOrko.x + cadaOrko.w > 10 + cadaFlecha.x) &&
+                (cadaOrko.y + 10 < cadaFlecha.y + cadaFlecha.h) &&
+                (cadaOrko.y + cadaOrko.h > 10 + cadaFlecha.y)
+            ) {
+                // Collision detected!
+                console.log("COLISION FLECHA CON ORKO!!");
+                
+                // Eliminamos al Orko
+                cadaOrko.node.remove();
+                orkNormalArray.splice(indiceOrko, 1);
 
-    
-          }
-
-        })
-    
+                // Eliminamos la Flecha
+                cadaFlecha.node.remove();
+                flechaArray.splice(indiceFlecha,1);
+            }
+          })
         })
 }
 
@@ -456,6 +460,8 @@ function movimientoLegolas () {
 
 }*/
 
+
+
 window.addEventListener("keydown", (event) => {
     if (event.code === "KeyD")
         legolasObj.isMovingRight = true;
@@ -477,6 +483,9 @@ window.addEventListener("keyup", (event) => {
     if (event.code === "KeyW")
         legolasObj.isMovingUp = false;
 })
+
+
+// Disparo de flechas
 
 window.addEventListener("keydown", (event) => {
     if (event.code === "Space" && legolasObj.canShoot) {
