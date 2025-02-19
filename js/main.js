@@ -41,6 +41,7 @@ let timeOutOleada5 = null;
 let timerID = null;
 let cronometro = 0;
 let mejorPuntuacion = 0;
+let ultimaTecla = "";
 //let puntoDeSpawn = ["derecha", "izquierda", "arriba", "abajo"];
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
@@ -140,12 +141,21 @@ function restartGame () {
     
         // Reiniciamos las variables a su modo inicio
         gameOverScreenNode.style.display = "none";
+        gameScreenNode.style.display = "flex";
         legolasObj = null;
         orkNormalArray = [];
         gameInvertalID = null;
         enemigosSpawnID = [];
         timerID = null;
         cronometro = 0;
+        enemigosSpawnArribaID = null;
+        enemigosSpawnAbajoID = null;
+        enemigosSpawnDerechaID = null;
+        enemigosSpawnIzquierdaID = null;
+        timeOutOleada2 = null;
+        timeOutOleada3 = null;
+        timeOutOleada4 = null;
+        timeOutOleada5 = null;
 }
 
 function startCronometro() {
@@ -463,14 +473,20 @@ function movimientoLegolas () {
 
 
 window.addEventListener("keydown", (event) => {
-    if (event.code === "KeyD")
+    if (event.code === "KeyD") {
         legolasObj.isMovingRight = true;
-    if (event.code === "KeyA")
+        ultimaTecla = "D";
+    }
+    if (event.code === "KeyA") {
         legolasObj.isMovingLeft = true;
-    if (event.code === "KeyS")
+        ultimaTecla = "A";
+    }    
+    if (event.code === "KeyS") {
         legolasObj.isMovingDown = true
-    if (event.code === "KeyW")
+    }    
+    if (event.code === "KeyW") {
         legolasObj.isMovingUp = true;
+    }
 })
 
 window.addEventListener("keyup", (event) => {
@@ -487,6 +503,25 @@ window.addEventListener("keyup", (event) => {
 
 // Disparo de flechas
 
+gameBoxNode.addEventListener("click", (event) => {
+    // Creamos la flecha y la ponemos en el Array
+    //console.log(event)
+    let posicionFlechaX = event.offsetX
+    let posicionFlechaY = event.offsetY
+    
+    let anguloDisparo = Math.atan2(posicionFlechaY - legolasObj.y, posicionFlechaX - legolasObj.x);
+
+    let flechaObj = new Flecha(legolasObj.x, legolasObj.y, anguloDisparo);
+    //let flechaObj = new Flecha(event.clientX, event.clientY,anguloDisparo);
+    flechaArray.push(flechaObj);
+
+    legolasObj.canShoot = false;
+    setTimeout(() => {
+        legolasObj.canShoot = true;
+    },2000) // 2 segundos de delay entre cada disparo
+})
+
+/*
 window.addEventListener("keydown", (event) => {
     if (event.code === "Space" && legolasObj.canShoot) {
         let flechaObj = new Flecha(legolasObj.x, legolasObj.y);
@@ -499,26 +534,5 @@ window.addEventListener("keydown", (event) => {
 
     
 })
-
-
-
-
-/* PLANIFICACIÓN
-
-- Crear la clase Legolas (x, y, h, w, speed)   ✅
-- Agregar a Legolas                            ✅
-    - Movimiento con teclas (ASWD)             ✅
-- Crear la clase enemigos (x, y, h, w, speed)  ✅
-    - Movimiento automático de los enemigos    ✅
-    - Los enemigos se mueven en horizontal o vertical ✅
-- Agregar los enemigos (spawn) ✅
-- Remover a los enemigos (despawn) ✅
-- Colisión de Legolas con los enemigos ✅
-- Colisión de Legolas con los bordes (no debe pasar) ✅
-- Timer con el tiempo transcurrido ✅
-- Game Over ✅
-- Agregar fondo
-- Agregar imagenes botones
-
-
 */
+

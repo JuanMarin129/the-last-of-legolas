@@ -39,8 +39,8 @@ body {
 }
 
 #game-box {
-    background-color: #16a74b;
-    /*background-image: url(../images/suelo_hierba_01.jpg);*/
+    /*background-color: #16a74b;*/
+    background-image: url(../images/suelo_hierba_02.jpg);
     width: 1000px;
     height: 700px;
 
@@ -54,6 +54,10 @@ body {
     pointer-events: none; /* Evita que el jugador arrastre sin querer los elemengos del game-box*/
 }
 
+#game-box:hover {
+    cursor:url(../images/crosshair_03.png);
+}
+
 #tiempo-transcurrido {
     font-family: "Caesar Dressing", serif;
     font-weight: 400;
@@ -61,5 +65,4 @@ body {
     margin-bottom: 3rem;
     font-size: 3rem;
 }
-
 
