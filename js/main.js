@@ -41,7 +41,6 @@ let timeOutOleada5 = null;
 let timerID = null;
 let cronometro = 0;
 let mejorPuntuacion = 0;
-let ultimaTecla = "";
 //let puntoDeSpawn = ["derecha", "izquierda", "arriba", "abajo"];
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
@@ -475,11 +474,9 @@ function movimientoLegolas () {
 window.addEventListener("keydown", (event) => {
     if (event.code === "KeyD") {
         legolasObj.isMovingRight = true;
-        ultimaTecla = "D";
     }
     if (event.code === "KeyA") {
         legolasObj.isMovingLeft = true;
-        ultimaTecla = "A";
     }    
     if (event.code === "KeyS") {
         legolasObj.isMovingDown = true
@@ -541,4 +538,6 @@ window.addEventListener("keydown", (event) => {
     
 })
 */
+
+
 

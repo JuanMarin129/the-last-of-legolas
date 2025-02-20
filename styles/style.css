@@ -28,10 +28,31 @@ body {
 }
 
 #start-button {
-    background-color: yellowgreen;
+    background-color: green;
+    color: white;
+    border: 1px solid black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+    padding: 12px 18px;
+    border-radius: 15px;
+    transition: 0.4s;
+
+    /*background-color: yellowgreen;
     border-radius: 10px;
     padding: 10px;
-    font-size: 20px;
+    font-size: 20px;*/
+}
+
+#start-button:hover {
+    background-color: cyan;
+    color: black;
+}
+
+#start-button:hover:active {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 #game-screen {
@@ -53,10 +74,10 @@ body {
 #game-box * {
     pointer-events: none; /* Evita que el jugador arrastre sin querer los elemengos del game-box*/
 }
-
+/*
 #game-box:hover {
-    cursor:url(../images/crosshair_03.png);
-}
+    /*cursor:url(../images/crosshair_03.png);
+}*/
 
 #tiempo-transcurrido {
     font-family: "Caesar Dressing", serif;
