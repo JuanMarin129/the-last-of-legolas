@@ -6,8 +6,18 @@ class Legolas {
         this.node = document.createElement("img");
         this.node.src = "./images/Legolas_02.png";
 
+        // Creamos la barra de progreso
+        this.nodeBarra = document.createElement("div");
+        this.nodeBarra.setAttribute("id", "barra-disparo");
+        this.nodeBarra.style.height = "10px";
+        this.nodeBarra.style.width = "50%";
+        this.nodeBarra.style.color = "red";
+        this.nodeBarra.style.backgroundColor = "red";
+
+
         // Añadimos el nodo
         gameBoxNode.append(this.node);
+        gameBoxNode.append(this.nodeBarra);
 
 
 
@@ -17,13 +27,22 @@ class Legolas {
         this.w = 80;    // Ancho Legolas
         this.h = 90;    // Alto Legolas
 
+        // Atributos de la Barra de Disparo
+        this.largoBarra = this.x + 10;
+        this.alturaBarra = this.y + this.h;
+
         this.node.style.position = "absolute" // Para ubicarlo dentro de la caja del juego
+        this.nodeBarra.style.position = "absolute";
 
         // Posición y tamaño Legolas
         this.node.style.left = `${this.x}px`;
         this.node.style.top = `${this.y}px`;
         this.node.style.width = `${this.w}px`;
         this.node.style.height = `${this.h}px`;
+
+        // Posición de la barra de disparo
+        this.nodeBarra.style.left = `${this.largoBarra}px`;
+        this.nodeBarra.style.top = `${this.alturaBarra}px`;
 
 
         // Propiedades adicionales
