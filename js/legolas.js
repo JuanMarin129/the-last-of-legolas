@@ -73,7 +73,7 @@ class Legolas {
         this.isMovingUp = false;
         this.isMovingDown = false;
         this.canShoot = true;
-        this.hasMagicShield = true;
+        this.hasMagicShield = false;
 
     }
 

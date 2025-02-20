@@ -44,6 +44,7 @@ let timerID = null;
 let cronometro = 0;
 let mejorPuntuacion = 0;
 let totalOrcosMuertos = 0;
+let invulnerable = false;
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
 //let altoGameBox = gameBoxNode.style.height;
@@ -146,6 +147,7 @@ function restartGame () {
         gameOverScreenNode.style.display = "none";
         gameScreenNode.style.display = "flex";
         legolasObj = null;
+        armaduraObj = null;
         orkNormalArray = [];
         gameInvertalID = null;
         enemigosSpawnID = [];
@@ -196,8 +198,12 @@ function gameLoop() {
 
     legolasObj.movimientoLegolas();
     enemigoDespawn();
-    checkColisionLegolasOrkos();
+    if(!invulnerable) {
+        checkColisionLegolasOrkos();
+    }
+    
     checkColisionFlechasOrkos();
+    checkColisionLegolasArmadura();
 }
 
 function enemigoSpawn(spawn) {
@@ -295,9 +301,22 @@ function checkColisionLegolasOrkos() {
         (cadaOrko.y + 10 < legolasObj.y + legolasObj.h) &&
         (cadaOrko.y + cadaOrko.h > 10 + legolasObj.y)
       ) {
-        // Collision detected!
-        //console.log("COLISION!!!");
-        gameOver();
+        
+        // Nos quitan el Escudo Mágico y tenemos unos segundos de Invul para alejarnos del enemigo
+        if(legolasObj.hasMagicShield) {
+            legolasObj.hasMagicShield = false;
+            legolasObj.actualizarMagicShield();
+            console.log("TE QUITARON EL ESCUDO MAGICO");
+            invulnerable = true;
+            setTimeout( () => {
+                invulnerable = false;
+            },3000) // 3 segundos
+        }
+
+        else {
+            gameOver();
+        }
+
 
       }
 
@@ -330,6 +349,33 @@ function checkColisionFlechasOrkos() {
           })
         })
 }
+
+function checkColisionLegolasArmadura() {
+
+    
+    if(armaduraObj !== null) {
+        if (
+            (armaduraObj.x < legolasObj.x + legolasObj.w)  &&
+            (armaduraObj.x + armaduraObj.w > legolasObj.x) &&
+            (armaduraObj.y < legolasObj.y + legolasObj.h) &&
+            (armaduraObj.y + armaduraObj.h > legolasObj.y)
+        ) {
+            // Activa el Escudo Mágico
+            console.log("ESCUDO MÁGICO ACTIVADO")
+            legolasObj.hasMagicShield = true;
+            legolasObj.actualizarMagicShield();
+
+            // Borramos nodo y ponemos a null para que no siga haciendo el checking
+            armaduraObj.node.remove();
+            armaduraObj = null;
+        }
+    }
+
+}
+// Cuando volvamos a crear la armaduraObj, dejará de ser null y volverá a realizar la comprobación
+
+
+// PANTALLA FINAL
 
 function gameOver() {
     // Detenemos TODOS los intervalos
