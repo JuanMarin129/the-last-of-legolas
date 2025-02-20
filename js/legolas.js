@@ -10,7 +10,8 @@ class Legolas {
         this.nodeBarra = document.createElement("div");
         this.nodeBarra.setAttribute("id", "barra-disparo");
         this.nodeBarra.style.height = "10px";
-        this.nodeBarra.style.width = "50%";
+        this.nodeBarra.style.maxWidth = "60px";
+        this.nodeBarra.style.width = "100%";
         this.nodeBarra.style.color = "red";
         this.nodeBarra.style.backgroundColor = "red";
 
@@ -65,6 +66,10 @@ class Legolas {
             if((this.x + this.w +5) <= gameBoxNode.offsetWidth) {
                 this.x += this.speed;
                 this.node.style.left = `${this.x}px`;
+
+                //Barra de disparo
+                this.largoBarra += this.speed;
+                this.nodeBarra.style.left = `${this.largoBarra}px`;
                 }
         }
 
@@ -72,6 +77,10 @@ class Legolas {
             if(this.x -5 >= 0) {
                 this.x -= this.speed;
                 this.node.style.left = `${this.x}px`;
+
+                //Barra de disparo
+                this.largoBarra -= this.speed;
+                this.nodeBarra.style.left = `${this.largoBarra}px`;
             }
         }
 
@@ -79,6 +88,10 @@ class Legolas {
             if(this.y - 5 >= 0) {
                 this.y -= this.speed;
                 this.node.style.top = `${this.y}px`;
+
+                //Barra de disparo
+                this.alturaBarra -= this.speed;
+                this.nodeBarra.style.top = `${this.alturaBarra}px`;
             }
         }
 
@@ -86,6 +99,10 @@ class Legolas {
             if((this.y + this.h + 5) <= gameBoxNode.offsetHeight) {
                 this.y += this.speed;
                 this.node.style.top = `${this.y}px`;
+
+                //Barra de disparo
+                this.alturaBarra += this.speed;
+                this.nodeBarra.style.top = `${this.alturaBarra}px`;
             }
         }
 
