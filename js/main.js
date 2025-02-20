@@ -309,6 +309,7 @@ function checkColisionLegolasOrkos() {
             legolasObj.hasMagicShield = false;
             legolasObj.actualizarMagicShield();
             console.log("TE QUITARON EL ESCUDO MAGICO");
+            legolasObj.hitLegolas();
             invulnerable = true;
             setTimeout( () => {
                 invulnerable = false;

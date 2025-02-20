@@ -183,6 +183,21 @@ class Legolas {
         }
     }
 
+    hitLegolas() {
+        let contadorTiempo = 0;
+        let hitIntervalID;
+        console.log("Estás dentro de HIT LEGOLAS");
+        hitIntervalID = setInterval( () => {
+            this.node.style.display = "none";
+            setTimeout( () => {
+                this.node.style.display = "block";
+            },80)
+            contadorTiempo++;
+            if(contadorTiempo === 10)
+                clearInterval(hitIntervalID);
+        },200);
+    }
+
 /*
     movimientoHorizontalDerecha() {
         // Con el if, impedimos que Legolas se salga del Game Box por la derecha
