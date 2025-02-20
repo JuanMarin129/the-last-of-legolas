@@ -19,6 +19,7 @@ const tiempoTranscurridoContenedor = document.querySelector("#tiempo-transcurrid
 
 // MEJOR PUNTUACIÓN
 const mejorPuntuacionNode = document.querySelector("#mejor-puntuacion");
+const orcosEliminadosNode = document.querySelector("#orcos-eliminados");
 
 
 
@@ -41,7 +42,7 @@ let timeOutOleada5 = null;
 let timerID = null;
 let cronometro = 0;
 let mejorPuntuacion = 0;
-//let puntoDeSpawn = ["derecha", "izquierda", "arriba", "abajo"];
+let totalOrcosMuertos = 0;
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
 //let altoGameBox = gameBoxNode.style.height;
@@ -155,6 +156,7 @@ function restartGame () {
         timeOutOleada3 = null;
         timeOutOleada4 = null;
         timeOutOleada5 = null;
+        totalOrcosMuertos = 0;
 }
 
 function startCronometro() {
@@ -316,6 +318,7 @@ function checkColisionFlechasOrkos() {
                 // Eliminamos al Orko
                 cadaOrko.node.remove();
                 orkNormalArray.splice(indiceOrko, 1);
+                totalOrcosMuertos += 1;
 
                 // Eliminamos la Flecha
                 cadaFlecha.node.remove();
@@ -398,6 +401,10 @@ function actualizarPuntuacion() {
         mejorPuntuacionNode.innerText = `No has podido mejorar tu marca... ¡Sigue intentándolo! 
         La marca que has conseguido ahora es: ${cronoActual[0]}:${cronoActual[1]}
         La mejor marca que has conseguido es: ${mejorCrono[0]}:${mejorCrono[1]}`;
+
+
+        // Añadimos debajo los Orcos que ha eliminado el jugador durante la partida.
+        orcosEliminadosNode.innerText = `Has conseguido eliminar a ${totalOrcosMuertos} orcos. ¡Eres una máquina de matar orcos!`;
 
     }
 }
