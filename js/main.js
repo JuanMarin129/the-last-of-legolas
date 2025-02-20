@@ -522,6 +522,8 @@ gameBoxNode.addEventListener("click", (event) => {
         //let flechaObj = new Flecha(event.clientX, event.clientY,anguloDisparo);
         flechaArray.push(flechaObj);
 
+        legolasObj.actualizarBarraDisparo();
+
         legolasObj.canShoot = false;
         setTimeout(() => {
             legolasObj.canShoot = true;
