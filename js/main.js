@@ -341,22 +341,27 @@ function checkColisionFlechasOrkos() {
 
                 // Liberamos prisionero
                 if(!prisioneroActivo) {
-                    prisioneroObj = new Prisionero(cadaOrko.x,cadaOrko.y -50);
-                    prisioneroActivo = true;
+                    // Generamos un número aleatorio para dar un 20% de probabilidad de que un Orko suelte a un prisionero
+                    let randomNumber = Math.floor((Math.random() * 10) +1);
+                    console.log("Random Number " + randomNumber);
+                    if(randomNumber >=8) {
+                        prisioneroObj = new Prisionero(cadaOrko.x,cadaOrko.y -50);
+                        prisioneroActivo = true;
 
-                    // Sacamos el loot
-                    setTimeout( () => {
-                        armaduraObj = new Armor(prisioneroObj.x + 95,prisioneroObj.y + 95);
-                    },2250)
+                        // Sacamos el loot
+                        setTimeout( () => {
+                            armaduraObj = new Armor(prisioneroObj.x + 95,prisioneroObj.y + 95);
+                        },2250)
 
-                    // Quitamos al prisionero
-                    setTimeout(() => {
-                        prisioneroObj.node.remove();
-                        prisioneroObj = null;
-                        prisioneroActivo = false; // Evitamos que salga más de un prisionero en pantalla
-                        
+                        // Quitamos al prisionero
+                        setTimeout(() => {
+                            prisioneroObj.node.remove();
+                            prisioneroObj = null;
+                            prisioneroActivo = false; // Evitamos que salga más de un prisionero en pantalla
+                            
 
-                    },3000) // 3 segundos
+                        },3000) // 3 segundos
+                    }
                 }
 
 
