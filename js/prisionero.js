@@ -1,10 +1,10 @@
-class Armor {
+class Prisionero {
     constructor (posicionX,posicionY) {
-        // Propiedades de la Armadura
+        // Propiedades del Prisionero
 
         // Creamos nodo y lo añadimos a la Game Box
         this.node = document.createElement("img");
-        this.node.src = "./images/armor_icon_01.png";
+        this.node.src = "./images/prisionero_01.gif";
 
         // Lo añadimos al Game Box
         gameBoxNode.append(this.node);
@@ -12,8 +12,8 @@ class Armor {
         // Atributos de la Armadura
         this.x = posicionX;     // Eje X
         this.y = posicionY;     // Eje Y
-        this.w = 60;    // Ancho
-        this.h = 55;    // Alto
+        this.w = 160;    // Ancho
+        this.h = 150;    // Alto
 
         // Ubicamos el objeto dentro de la caja de juego
         this.node.style.position = "absolute" 
@@ -25,4 +25,3 @@ class Armor {
         this.node.style.height = `${this.h}px`;
     }
 }
-

@@ -29,6 +29,7 @@ gameOverScreenNode.style.display = "none";
 //gameScreenNode.style.display = "none";
 let legolasObj = null;
 let armaduraObj = null;
+let prisioneroObj = null;
 let orkNormalArray = [];
 let flechaArray = [];
 let gameInvertalID = null;
@@ -45,6 +46,7 @@ let cronometro = 0;
 let mejorPuntuacion = 0;
 let totalOrcosMuertos = 0;
 let invulnerable = false;
+let prisioneroActivo = false;
 
 //let anchoGameBox = gameBoxNode.style.width + 10;
 //let altoGameBox = gameBoxNode.style.height;
@@ -63,7 +65,7 @@ function startGame () {
     legolasObj = new Legolas();
     //console.log(legolasObj);
 
-    armaduraObj = new Armor();
+    //prisioneroObj = new Prisionero();
 
     // Iniciamos intervalo del juego
     gameIntervalID = setInterval( () => {
@@ -336,7 +338,28 @@ function checkColisionFlechasOrkos() {
             ) {
                 // Collision detected!
                 console.log("COLISION FLECHA CON ORKO!!");
-                
+
+                // Liberamos prisionero
+                if(!prisioneroActivo) {
+                    prisioneroObj = new Prisionero(cadaOrko.x,cadaOrko.y -50);
+                    prisioneroActivo = true;
+
+                    // Sacamos el loot
+                    setTimeout( () => {
+                        armaduraObj = new Armor(prisioneroObj.x + 95,prisioneroObj.y + 95);
+                    },2250)
+
+                    // Quitamos al prisionero
+                    setTimeout(() => {
+                        prisioneroObj.node.remove();
+                        prisioneroObj = null;
+                        prisioneroActivo = false; // Evitamos que salga más de un prisionero en pantalla
+                        
+
+                    },3000) // 3 segundos
+                }
+
+
                 // Eliminamos al Orko
                 cadaOrko.node.remove();
                 orkNormalArray.splice(indiceOrko, 1);
@@ -345,6 +368,7 @@ function checkColisionFlechasOrkos() {
                 // Eliminamos la Flecha
                 cadaFlecha.node.remove();
                 flechaArray.splice(indiceFlecha,1);
+
             }
           })
         })
