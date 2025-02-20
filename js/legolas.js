@@ -88,6 +88,9 @@ class Legolas {
                 this.x += this.speed;
                 this.node.style.left = `${this.x}px`;
 
+                // Rotamos el sprite
+                this.node.style.transform = "scaleX(-1)";
+
                 // Barra de disparo
                 this.largoBarra += this.speed;
                 this.nodeBarra.style.left = `${this.largoBarra}px`;
@@ -102,6 +105,9 @@ class Legolas {
             if(this.x -5 >= 0) {
                 this.x -= this.speed;
                 this.node.style.left = `${this.x}px`;
+
+                // Rotamos el sprite
+                this.node.style.transform = "scaleX(1)";
 
                 // Barra de disparo
                 this.largoBarra -= this.speed;
@@ -144,6 +150,7 @@ class Legolas {
         }
 
     }
+
 
     actualizarBarraDisparo() {
     

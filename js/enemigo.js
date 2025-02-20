@@ -23,6 +23,8 @@ class Enemigo {
             // this.x = Math.floor(Math.random() * 50) - 150;
             this.x = -100;
             this.y = Math.floor(Math.random() * 600) + 90;
+            // Rotamos el sprite
+            this.node.style.transform = "scaleX(-1)";
 
         }
         else if(this.posicionSpawn === "abajo") {
@@ -32,6 +34,9 @@ class Enemigo {
         else if(this.posicionSpawn === "arriba") {
             this.x = Math.floor(Math.random() * 650) + 90;
             this.y = -100;
+            // Rotamos el sprite
+            this.node.style.transform = "scaleX(-1)";
+
         }
        
         this.w = 105;
