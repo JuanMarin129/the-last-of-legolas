@@ -19,7 +19,10 @@ const tiempoTranscurridoContenedor = document.querySelector("#tiempo-transcurrid
 
 // MEJOR PUNTUACIÓN
 const mejorPuntuacionNode = document.querySelector("#mejor-puntuacion");
+//mejorPuntuacionNode.style.padding = "30px";
+mejorPuntuacionNode.style.marginTop = "120px";
 const orcosEliminadosNode = document.querySelector("#orcos-eliminados");
+orcosEliminadosNode.style.marginBottom = "20px";
 
 
 // MÚSICA Y EFECTOS

@@ -55,6 +55,30 @@ body {
     color: rgba(255, 255, 255, 0.4);
 }
 
+#restart-button {
+    background-color: bisque;
+    color: black;
+    border: 1px solid black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right: 10px;
+    padding: 12px 18px;
+    border-radius: 15px;
+    transition: 0.4s;
+    margin-top: 50px;
+}
+
+#restart-button:hover {
+    background-color: green;
+    color: white;
+}
+
+#restart-button:hover:active {
+    color: rgba(255, 255, 255, 0.4);
+}
+
 #game-screen {
     display: none;
 }
@@ -91,3 +115,17 @@ body {
     height: 10px;
 }
 
+
+#game-over-screen {
+    display: flex;
+    width: auto;
+    height: 600px;
+    background-image: url(../images/board_notice_02.png);
+    background-repeat: no-repeat;
+    background-size: 700px;
+    background-position: center;
+    font-family: "Macondo", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2rem;
+}
