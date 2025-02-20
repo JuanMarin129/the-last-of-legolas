@@ -46,8 +46,8 @@ class Legolas {
         this.MagicShieldPosicionX = this.x - 22;
         this.MagicShieldPosicionY = this.y - 15;
 
-
-        this.node.style.position = "absolute" // Para ubicarlo dentro de la caja del juego
+        // Ubicamos los nodos dentro de la caja de juego
+        this.node.style.position = "absolute" 
         this.nodeBarra.style.position = "absolute";
         this.nodeMagicShield.style.position = "absolute";
 
@@ -73,7 +73,7 @@ class Legolas {
         this.isMovingUp = false;
         this.isMovingDown = false;
         this.canShoot = true;
-        this.canMagicShield = false;
+        this.hasMagicShield = true;
 
     }
 
@@ -167,22 +167,19 @@ class Legolas {
             }
             else {
                 this.anchoBarra += 0.08;
-                //console.log("Esto es anchoBarra " + this.anchoBarra);
                 this.nodeBarra.style.width = `${this.anchoBarra}%`;
             }
 
         },20)
     }
 
-    tenerMagicShield() {
-        if(this.canMagicShield) {
-            this.nodeMagicShield.style.display = "none";
-            this.canMagicShield = false;
+    actualizarMagicShield() {
+        if(this.hasMagicShield) {
+            this.nodeMagicShield.style.display = "block";
         }
 
-        if(!this.canMagicShield) {
-            this.nodeMagicShield.style.display = "block";
-            this.canMagicShield = true;
+        if(!this.hasMagicShield) {
+            this.nodeMagicShield.style.display = "none";
         }
     }
 

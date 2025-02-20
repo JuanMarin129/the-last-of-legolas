@@ -28,6 +28,7 @@ const orcosEliminadosNode = document.querySelector("#orcos-eliminados");
 gameOverScreenNode.style.display = "none";
 //gameScreenNode.style.display = "none";
 let legolasObj = null;
+let armaduraObj = null;
 let orkNormalArray = [];
 let flechaArray = [];
 let gameInvertalID = null;
@@ -60,6 +61,8 @@ function startGame () {
     // Creamos a Legolas
     legolasObj = new Legolas();
     //console.log(legolasObj);
+
+    armaduraObj = new Armor();
 
     // Iniciamos intervalo del juego
     gameIntervalID = setInterval( () => {
