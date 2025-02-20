@@ -22,6 +22,14 @@ const mejorPuntuacionNode = document.querySelector("#mejor-puntuacion");
 const orcosEliminadosNode = document.querySelector("#orcos-eliminados");
 
 
+// MÚSICA Y EFECTOS
+const battleTheme = new Audio('../music/battle_theme_01.mp3');
+battleTheme.volume = 0.05;
+battleTheme.loop = true;
+const magicShieldSound = new Audio('../music/magic_shield_sound_01.mp3');
+magicShieldSound.volume = 0.04;
+magicShieldSound.loop = true;
+
 
 // VARIABLES GLOBALES
 
@@ -60,6 +68,10 @@ function startGame () {
 
     // Mostrar pantalla del juego
     gameScreenNode.style.display = "flex";
+
+    // Música
+    battleTheme.currentTime = 0;
+    battleTheme.play();
 
     // Creamos a Legolas
     legolasObj = new Legolas();
@@ -308,6 +320,7 @@ function checkColisionLegolasOrkos() {
         if(legolasObj.hasMagicShield) {
             legolasObj.hasMagicShield = false;
             legolasObj.actualizarMagicShield();
+            magicShieldSound.pause();
             console.log("TE QUITARON EL ESCUDO MAGICO");
             legolasObj.hitLegolas();
             invulnerable = true;
@@ -394,6 +407,7 @@ function checkColisionLegolasArmadura() {
             console.log("ESCUDO MÁGICO ACTIVADO")
             legolasObj.hasMagicShield = true;
             legolasObj.actualizarMagicShield();
+            magicShieldSound.play();
 
             // Borramos nodo y ponemos a null para que no siga haciendo el checking
             armaduraObj.node.remove();
@@ -420,6 +434,9 @@ function gameOver() {
     clearTimeout(timeOutOleada3);
     clearTimeout(timeOutOleada4);
     clearTimeout(timeOutOleada5);
+
+    // Detenemos música de combate
+    battleTheme.pause();
     
 
     // Comprobamos si hemos mejorado nuestra mejor puntuacion y actualizamos
