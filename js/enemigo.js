@@ -76,6 +76,23 @@ class Enemigo {
         }
     }
     
+
+    sonidoOrkoEliminado() {
+        if(this.posicionSpawn === "derecha") {
+            orkoEliminado01.play();
+        }
+        else if(this.posicionSpawn === "izquierda") {
+            orkoEliminado02.play();
+        }
+        else if(this.posicionSpawn === "abajo") {
+            orkoEliminado03.play();
+        }
+        else if(this.posicionSpawn === "arriba") {
+            orkoEliminado03.play();
+
+        }
+
+    }
     
 
 

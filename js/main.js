@@ -25,24 +25,30 @@ orcosEliminadosNode.style.marginBottom = "20px";
 
 
 // MÚSICA Y EFECTOS
-const battleTheme = new Audio('../music/battle_theme_01.mp3');
+const battleTheme = new Audio('./music/battle_theme_01.mp3');
 battleTheme.volume = 0.03;
 battleTheme.loop = true;
-const magicShieldSound = new Audio('../music/magic_shield_sound_01.mp3');
+const magicShieldSound = new Audio('./music/magic_shield_sound_01.mp3');
 magicShieldSound.volume = 0.04;
 magicShieldSound.loop = true;
-const musicIntro = new Audio('../music/the_last_of_legolas_theme_01.mp3');
+const musicIntro = new Audio('./music/the_last_of_legolas_theme_01.mp3');
 musicIntro.volume = 0.05;
-const disparoFlecha01 = new Audio('../music/disparo_flecha_01.mp3');
-const disparoFlecha02 = new Audio('../music/disparo_flecha_02.mp3');
-const disparoFlecha03 = new Audio('../music/disparo_flecha_03.mp3');
-const disparoFlecha04 = new Audio('../music/disparo_flecha_04.mp3');
-const disparoFlecha05 = new Audio('../music/disparo_flecha_05.mp3');
-disparoFlecha01.volume = 0.1;
-disparoFlecha02.volume = 0.1;
-disparoFlecha03.volume = 0.1;
-disparoFlecha04.volume = 0.1;
-disparoFlecha05.volume = 0.1;
+const disparoFlecha01 = new Audio('./music/disparo_flecha_01.mp3');
+const disparoFlecha02 = new Audio('./music/disparo_flecha_02.mp3');
+const disparoFlecha03 = new Audio('./music/disparo_flecha_03.mp3');
+const disparoFlecha04 = new Audio('./music/disparo_flecha_04.mp3');
+const disparoFlecha05 = new Audio('./music/disparo_flecha_05.mp3');
+disparoFlecha01.volume = 0.10;
+disparoFlecha02.volume = 0.10;
+disparoFlecha03.volume = 0.10;
+disparoFlecha04.volume = 0.10;
+disparoFlecha05.volume = 0.10;
+const orkoEliminado01 = new Audio('./music/orko_death_01.mp3');
+const orkoEliminado02 = new Audio('./music/orko_death_02.mp3');
+const orkoEliminado03 = new Audio('./music/orko_death_03.mp3');
+orkoEliminado01.volume = 0.03;
+orkoEliminado02.volume = 0.03;
+orkoEliminado03.volume = 0.03;
 
 
 // VARIABLES GLOBALES
@@ -398,6 +404,7 @@ function checkColisionFlechasOrkos() {
 
 
                 // Eliminamos al Orko
+                cadaOrko.sonidoOrkoEliminado();
                 cadaOrko.node.remove();
                 orkNormalArray.splice(indiceOrko, 1);
                 totalOrcosMuertos += 1;
