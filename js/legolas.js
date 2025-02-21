@@ -173,6 +173,26 @@ class Legolas {
         },20)
     }
 
+    sonidoDisparoFlecha() {
+        let numeroRandom = Math.floor((Math.random() * 5) + 1);
+
+        if(numeroRandom === 1) {
+            disparoFlecha01.play();
+        }
+        if(numeroRandom === 2) {
+            disparoFlecha02.play();
+        }
+        if(numeroRandom === 3) {
+            disparoFlecha03.play();
+        }
+        if(numeroRandom === 4) {
+            disparoFlecha04.play();
+        }
+        if(numeroRandom === 5) {
+            disparoFlecha05.play();
+        }
+    }
+
     actualizarMagicShield() {
         if(this.hasMagicShield) {
             this.nodeMagicShield.style.display = "block";

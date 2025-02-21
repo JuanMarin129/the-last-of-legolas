@@ -11,7 +11,6 @@ const restartBtnNode = document.querySelector("#restart-button");
 
 
 // GAME BOX
-
 const gameBoxNode = document.querySelector("#game-box");
 
 // TIEMPO TRANSCURRIDO
@@ -27,11 +26,23 @@ orcosEliminadosNode.style.marginBottom = "20px";
 
 // MÚSICA Y EFECTOS
 const battleTheme = new Audio('../music/battle_theme_01.mp3');
-battleTheme.volume = 0.05;
+battleTheme.volume = 0.03;
 battleTheme.loop = true;
 const magicShieldSound = new Audio('../music/magic_shield_sound_01.mp3');
 magicShieldSound.volume = 0.04;
 magicShieldSound.loop = true;
+const musicIntro = new Audio('../music/the_last_of_legolas_theme_01.mp3');
+musicIntro.volume = 0.05;
+const disparoFlecha01 = new Audio('../music/disparo_flecha_01.mp3');
+const disparoFlecha02 = new Audio('../music/disparo_flecha_02.mp3');
+const disparoFlecha03 = new Audio('../music/disparo_flecha_03.mp3');
+const disparoFlecha04 = new Audio('../music/disparo_flecha_04.mp3');
+const disparoFlecha05 = new Audio('../music/disparo_flecha_05.mp3');
+disparoFlecha01.volume = 0.1;
+disparoFlecha02.volume = 0.1;
+disparoFlecha03.volume = 0.1;
+disparoFlecha04.volume = 0.1;
+disparoFlecha05.volume = 0.1;
 
 
 // VARIABLES GLOBALES
@@ -75,6 +86,10 @@ function startGame () {
     // Música
     battleTheme.currentTime = 0;
     battleTheme.play();
+
+    // Desactivamos el video de la intro
+    /*videoIntro.pause();
+    videoIntro.currentTime = 0;*/
 
     // Creamos a Legolas
     legolasObj = new Legolas();
@@ -622,6 +637,7 @@ gameBoxNode.addEventListener("click", (event) => {
         flechaArray.push(flechaObj);
 
         legolasObj.actualizarBarraDisparo();
+        legolasObj.sonidoDisparoFlecha();
 
         legolasObj.canShoot = false;
         setTimeout(() => {
