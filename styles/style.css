@@ -27,6 +27,10 @@ body {
     margin: 40px;
 }
 
+#start-screen img {
+    width: 50%;
+}
+
 #start-button {
     background-color: green;
     color: white;

@@ -26,13 +26,15 @@ orcosEliminadosNode.style.marginBottom = "20px";
 
 // MÚSICA Y EFECTOS
 const battleTheme = new Audio('./music/battle_theme_01.mp3');
-battleTheme.volume = 0.03;
+battleTheme.volume = 0.02;
 battleTheme.loop = true;
 const magicShieldSound = new Audio('./music/magic_shield_sound_01.mp3');
-magicShieldSound.volume = 0.04;
+magicShieldSound.volume = 0.02;
 magicShieldSound.loop = true;
 const musicIntro = new Audio('./music/the_last_of_legolas_theme_01.mp3');
 musicIntro.volume = 0.05;
+const zenkiuSound = new Audio('./music/zenkiu_01.mp3');
+zenkiuSound.volume = 0.08;
 const disparoFlecha01 = new Audio('./music/disparo_flecha_01.mp3');
 const disparoFlecha02 = new Audio('./music/disparo_flecha_02.mp3');
 const disparoFlecha03 = new Audio('./music/disparo_flecha_03.mp3');
@@ -46,9 +48,9 @@ disparoFlecha05.volume = 0.10;
 const orkoEliminado01 = new Audio('./music/orko_death_01.mp3');
 const orkoEliminado02 = new Audio('./music/orko_death_02.mp3');
 const orkoEliminado03 = new Audio('./music/orko_death_03.mp3');
-orkoEliminado01.volume = 0.03;
-orkoEliminado02.volume = 0.03;
-orkoEliminado03.volume = 0.03;
+orkoEliminado01.volume = 0.04;
+orkoEliminado02.volume = 0.04;
+orkoEliminado03.volume = 0.04;
 
 
 // VARIABLES GLOBALES
@@ -385,6 +387,7 @@ function checkColisionFlechasOrkos() {
                     if(randomNumber >=8) {
                         prisioneroObj = new Prisionero(cadaOrko.x,cadaOrko.y -50);
                         prisioneroActivo = true;
+                        zenkiuSound.play();
 
                         // Sacamos el loot
                         setTimeout( () => {
