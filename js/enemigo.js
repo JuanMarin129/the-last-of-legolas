@@ -93,10 +93,5 @@ class Enemigo {
         }
 
     }
-    
-
-
-
-
 
 }
