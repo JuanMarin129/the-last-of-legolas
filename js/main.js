@@ -18,7 +18,6 @@ const tiempoTranscurridoContenedor = document.querySelector("#tiempo-transcurrid
 
 // MEJOR PUNTUACIÓN
 const mejorPuntuacionNode = document.querySelector("#mejor-puntuacion");
-//mejorPuntuacionNode.style.padding = "30px";
 mejorPuntuacionNode.style.marginTop = "120px";
 const orcosEliminadosNode = document.querySelector("#orcos-eliminados");
 orcosEliminadosNode.style.marginBottom = "20px";
@@ -35,6 +34,8 @@ const musicIntro = new Audio('./music/the_last_of_legolas_theme_01.mp3');
 musicIntro.volume = 0.05;
 const zenkiuSound = new Audio('./music/zenkiu_01.mp3');
 zenkiuSound.volume = 0.08;
+const waaaghSound = new Audio('./music/waaagh_sound.mp3');
+waaaghSound.volume = 0.05;
 const disparoFlecha01 = new Audio('./music/disparo_flecha_01.mp3');
 const disparoFlecha02 = new Audio('./music/disparo_flecha_02.mp3');
 const disparoFlecha03 = new Audio('./music/disparo_flecha_03.mp3');
@@ -56,7 +57,6 @@ orkoEliminado03.volume = 0.04;
 // VARIABLES GLOBALES
 
 gameOverScreenNode.style.display = "none";
-//gameScreenNode.style.display = "none";
 let legolasObj = null;
 let armaduraObj = null;
 let prisioneroObj = null;
@@ -78,8 +78,7 @@ let totalOrcosMuertos = 0;
 let invulnerable = false;
 let prisioneroActivo = false;
 
-//let anchoGameBox = gameBoxNode.style.width + 10;
-//let altoGameBox = gameBoxNode.style.height;
+
 
 
 // FUNCIONES DEL JUEGO
@@ -94,10 +93,6 @@ function startGame () {
     // Música
     battleTheme.currentTime = 0;
     battleTheme.play();
-
-    // Desactivamos el video de la intro
-    /*videoIntro.pause();
-    videoIntro.currentTime = 0;*/
 
     // Creamos a Legolas
     legolasObj = new Legolas();
@@ -157,6 +152,7 @@ function startGame () {
         // Detenemos el primer intervalo para reiniciar oleada con spawn de menor tiempo
         clearInterval(enemigosSpawnDerechaID);
         clearInterval(enemigosSpawnIzquierdaID);
+        waaaghSound.play();
 
         enemigosSpawnDerechaID = setInterval( () => {
             //Enemigo Spawnea
@@ -176,11 +172,7 @@ function startGame () {
 }
 
 function restartGame () {
-     // Borramos los nodos hijos de Game Box para "limpiar" la pantalla
-        /*legolasObj.node.remove();
-        orkNormalArray.forEach((cadaOrko) => {
-            cadaOrko.node.remove();
-        })*/
+        // Borramos los nodos hijos de Game Box para "limpiar" la pantalla
         gameBoxNode.innerHTML = null;
     
         // Reiniciamos las variables a su modo inicio
@@ -208,21 +200,10 @@ function startCronometro() {
     // Tiempo transcurrido
     timerID = setInterval( () => {
         cronometro += 1;
-       //console.log("Estamos dentro de TimerID", cronometro);
-
+       
         // Mostramos el cronometro en minutos y segundos
         let actualTiempo = formatoMinutosSegundos(cronometro);
         tiempoTranscurridoContenedor.innerText = `Tiempo Transcurrido: ${actualTiempo[0]}:${actualTiempo[1]}`;
-
-        /*
-        let minutos = Math.floor(cronometro / 60)
-        .toString()
-        .padStart(2, "0");
-        let segundos = (cronometro % 60).toString().padStart(2, "0");
-        tiempoTranscurridoContenedor.innerText = `Tiempo Transcurrido: ${minutos}:${segundos}`;
-        */
-
-        //console.log(`Minutos y segundos ${minutos}:${segundos}`);
 
     },1000) // 1 segundo
 }
@@ -250,18 +231,6 @@ function enemigoSpawn(spawn) {
 
     let orkNormalObj = new Enemigo(spawn);
     orkNormalArray.push(orkNormalObj);
-/*
-    let orkNormalIzquierdaObj = new Enemigo(spawn);
-    orkNormalArray.push(orkNormalIzquierdaObj);
-
-    let orkNormalAbajoObj = new Enemigo(spawn);
-    orkNormalArray.push(orkNormalAbajoObj);
-   
-    let orkNormalArribaObj = new Enemigo(spawn);
-    orkNormalArray.push(orkNormalArribaObj);*/
-
-    console.log("Longitud array ", orkNormalArray.length);
-
 }
 
 function enemigoDespawn() {
@@ -289,45 +258,7 @@ function enemigoDespawn() {
 
             orkNormalArray.splice(indice, 1);
         }
-
-
-    })
-    /*
-    if (orkNormalArray.length >0) {
-        console.log(orkNormalArray[0].y)
-        if((orkNormalArray[0].posicionSpawn === "arriba") && (orkNormalArray[0].y > 700)) {
-            orkNormalArray[0].node.remove();
-
-            orkNormalArray.shift();
-
-            console.log("ORKO ABAJO BORRADO!!!");
-        }
-        else if((orkNormalArray[0].posicionSpawn === "izquierda") && (orkNormalArray[0].x > 1000 + orkNormalArray[0].w)) {
-            orkNormalArray[0].node.remove();
-
-            orkNormalArray.shift();
-
-            console.log("ORKO IZQUIERDO BORRADO!!!");
-        }
-        else if((orkNormalArray[0].posicionSpawn === "derecha") && (orkNormalArray[0].x < 0 - orkNormalArray[0].w)) {
-            orkNormalArray[0].node.remove();
-
-            orkNormalArray.shift();
-
-            console.log("ORKO DERECHO BORRADO!!!");
-        }
-        else if((orkNormalArray[0].posicionSpawn === "abajo") && (orkNormalArray[0].y < 0 - orkNormalArray[0].w)) {
-            orkNormalArray[0].node.remove();
-
-            orkNormalArray.shift();
-
-            console.log("ORKO ARRIBA BORRADO!!!");
-        }
-
-        
-       
-    }*/
-        
+    })     
 }
 
 
@@ -358,10 +289,7 @@ function checkColisionLegolasOrkos() {
         else {
             gameOver();
         }
-
-
       }
-
     })
 }
 
@@ -369,7 +297,6 @@ function checkColisionFlechasOrkos() {
     orkNormalArray.forEach((cadaOrko, indiceOrko) => { 
         flechaArray.forEach((cadaFlecha, indiceFlecha) => {
 
-        
             if (
                 (cadaOrko.x + 10 < cadaFlecha.x + cadaFlecha.w)  &&
                 (cadaOrko.x + cadaOrko.w > 10 + cadaFlecha.x) &&
@@ -377,13 +304,11 @@ function checkColisionFlechasOrkos() {
                 (cadaOrko.y + cadaOrko.h > 10 + cadaFlecha.y)
             ) {
                 // Collision detected!
-                console.log("COLISION FLECHA CON ORKO!!");
 
                 // Liberamos prisionero
                 if(!prisioneroActivo) {
                     // Generamos un número aleatorio para dar un 20% de probabilidad de que un Orko suelte a un prisionero
                     let randomNumber = Math.floor((Math.random() * 10) +1);
-                    console.log("Random Number " + randomNumber);
                     if(randomNumber >=8) {
                         prisioneroObj = new Prisionero(cadaOrko.x,cadaOrko.y -50);
                         prisioneroActivo = true;
@@ -432,7 +357,6 @@ function checkColisionLegolasArmadura() {
             (armaduraObj.y + armaduraObj.h > legolasObj.y)
         ) {
             // Activa el Escudo Mágico
-            console.log("ESCUDO MÁGICO ACTIVADO")
             legolasObj.hasMagicShield = true;
             legolasObj.actualizarMagicShield();
             magicShieldSound.play();
@@ -485,15 +409,8 @@ function actualizarPuntuacion() {
     
     // Guardamos la puntuación si ha superado la anterior marca
     if((localStorage.getItem(mejorPuntuacion) < cronometro)) {
-        
-        //console.log("Esto es Local Storage ANTES del setItem", localStorage.getItem(mejorPuntuacion));
 
         localStorage.setItem(mejorPuntuacion, cronometro);
-        //mejorCrono = localStorage.getItem(mejorPuntuacion);
-
-        //console.log("Esto es cronometro " + cronometro);
-
-        
 
         // Añadimos el nuevo marcador al HTML
 
@@ -506,20 +423,6 @@ function actualizarPuntuacion() {
 
         cronoActual = formatoMinutosSegundos(cronometro);
         mejorCrono = formatoMinutosSegundos(localStorage.getItem(mejorPuntuacion));
-
-        /*
-        let minutosActuales = Math.floor(cronometro / 60)
-        .toString()
-        .padStart(2, "0");
-        let segundosActuales = (cronometro % 60).toString().padStart(2, "0");
-
-        let minutosMejores = Math.floor(localStorage.getItem(mejorPuntuacion) / 60)
-        .toString()
-        .padStart(2, "0");
-        let segundosMejores = (localStorage.getItem(mejorPuntuacion) % 60).toString().padStart(2, "0");
-
-        */
-
 
         // Lo añadimos al HTML
         mejorPuntuacionNode.innerText = `No has podido mejorar tu marca... ¡Sigue intentándolo! 
@@ -566,42 +469,6 @@ restartBtnNode.addEventListener("click", () => {
 
 // Movimiento Legolas
 
-
-/*
-function movimientoLegolas () {
-    if(legolasObj.isMovingRight) {
-        console.log("Entramos en MovingRigth")
-        if((this.x + this.w +5) <= gameBoxNode.offsetWidth) {
-            this.x += this.speed;
-            this.node.style.left = `${this.x}px`;
-            }
-    }
-
-    if(legolasObj.isMovingLeft) {
-        if(this.x -5 >= 0) {
-            this.x -= this.speed;
-            this.node.style.left = `${this.x}px`;
-        }
-    }
-
-    if(legolasObj.isMovingUp) {
-        if(this.y - 5 >= 0) {
-            this.y -= this.speed;
-            this.node.style.top = `${this.y}px`;
-        }
-    }
-
-    if(legolasObj.isMovingDown) {
-        if((this.y + this.h + 5) <= gameBoxNode.offsetHeight) {
-            this.y += this.speed;
-            this.node.style.top = `${this.y}px`;
-        }
-    }
-
-}*/
-
-
-
 window.addEventListener("keydown", (event) => {
     if (event.code === "KeyD") {
         legolasObj.isMovingRight = true;
@@ -633,9 +500,7 @@ window.addEventListener("keyup", (event) => {
 
 gameBoxNode.addEventListener("click", (event) => {
     // Creamos la flecha y la ponemos en el Array
-    //console.log(event)
-    
-    
+ 
     if(legolasObj.canShoot) {
         let posicionFlechaX = event.offsetX
         let posicionFlechaY = event.offsetY
@@ -643,7 +508,6 @@ gameBoxNode.addEventListener("click", (event) => {
         let anguloDisparo = Math.atan2(posicionFlechaY - legolasObj.y, posicionFlechaX - legolasObj.x);
 
         let flechaObj = new Flecha(legolasObj.x, legolasObj.y, anguloDisparo);
-        //let flechaObj = new Flecha(event.clientX, event.clientY,anguloDisparo);
         flechaArray.push(flechaObj);
 
         legolasObj.actualizarBarraDisparo();
@@ -658,20 +522,6 @@ gameBoxNode.addEventListener("click", (event) => {
 
     
 
-/*
-window.addEventListener("keydown", (event) => {
-    if (event.code === "Space" && legolasObj.canShoot) {
-        let flechaObj = new Flecha(legolasObj.x, legolasObj.y);
-        flechaArray.push(flechaObj);
-        legolasObj.canShoot = false;
-        setTimeout(() => {
-            legolasObj.canShoot = true;
-        },2000) // 2 segundos de delay entre cada disparo
-    }
-
-    
-})
-*/
 
 
 

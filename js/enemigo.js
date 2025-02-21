@@ -16,13 +16,13 @@ class Enemigo {
         if(this.posicionSpawn === "derecha") {
             //this.x = Math.floor(Math.random() * 50) + 1050;
             this.x = 1100;
-            this.y = Math.floor(Math.random() * 600) + 90;
+            this.y = Math.floor(Math.random() * 600);
             
         }
         else if(this.posicionSpawn === "izquierda") {
             // this.x = Math.floor(Math.random() * 50) - 150;
             this.x = -100;
-            this.y = Math.floor(Math.random() * 600) + 90;
+            this.y = Math.floor(Math.random() * 600);
             // Rotamos el sprite
             this.node.style.transform = "scaleX(-1)";
 
